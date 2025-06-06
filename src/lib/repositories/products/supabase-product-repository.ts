@@ -37,4 +37,17 @@ export class SupabaseProductRepository implements IProductRepository {
 
         return product as Product;
     }
+
+    async getImageUrl(name: string) {
+        const { data, error } = await this.supabase.storage
+            .from('images')
+            .createSignedUrl(name, 60); // URL valid for 60 seconds
+
+        if (error) {
+            console.error(`Error generating signed URL: ${name}`, error);
+            return null;
+        } else {
+            return data.signedUrl;
+        }
+    }
 }

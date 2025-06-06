@@ -12,10 +12,11 @@ export default async function ProductPage({
   const repo: IProductRepository = new SupabaseProductRepository();
 
   const product = await repo.getProductBySlug(resolvedParams.slug);
+  const signedUrl = await repo.getImageUrl(product?.image_url || '');
 
   if (!product) return notFound();
 
   return (
-    <ProductDetails name={product.name} description={product.description} />
+    <ProductDetails name={product.name} description={product.description} imageUrl={signedUrl} />
   );
 }

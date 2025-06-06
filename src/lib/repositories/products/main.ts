@@ -9,6 +9,9 @@ export class ProductRepository implements IProductRepository {
         // CHANGE THIS LINE TO USE THE DESIRED REPOSITORY
         this.repo = new SupabaseProductRepository();
     }
+    getImageUrl(image_url: string): Promise<string | null> {
+        return this.repo.getImageUrl(image_url);
+    }
 
     getProductBySlug(slug: string): Promise<Product | null> {
         return this.repo.getProductBySlug(slug);
