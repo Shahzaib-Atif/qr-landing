@@ -1,15 +1,8 @@
-import { createClient } from "@/lib/supabase.server";
-import { cookies } from "next/headers";
+import { SupabaseProductRepository } from "@/lib/repositories/products/supabase-product-repository";
 
 export default async function Page() {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
-
-  const { data: products, error } = await supabase.from("products").select('*');
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const repo = new SupabaseProductRepository();
+  const products = await repo.getAllProducts();
 
   if (!products || products.length === 0) {
     return <div>No products found</div>;

@@ -1,7 +1,7 @@
-import { cookies } from "next/headers";
-import { createClient } from "@/lib/supabase.server";
 import { notFound } from "next/navigation";
 import { ProductDetails } from "@/components/ProductDetails";
+import { SupabaseProductRepository } from "@/lib/repositories/products/supabase-product-repository";
+import { IProductRepository } from "@/lib/repositories/interfaces";
 
 export default async function ProductPage({
   params,
@@ -9,16 +9,13 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = await params;
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const repo: IProductRepository = new SupabaseProductRepository();
 
-  const { data: product } = await supabase
-    .from("products")
-    .select("*")
-    .eq("slug", resolvedParams.slug)
-    .single();
+  const product = await repo.getProductBySlug(resolvedParams.slug);
 
   if (!product) return notFound();
 
-  return <ProductDetails name={product.name} description={product.description} />;
+  return (
+    <ProductDetails name={product.name} description={product.description} />
+  );
 }
