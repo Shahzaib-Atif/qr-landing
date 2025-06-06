@@ -6,9 +6,8 @@ import { ProductDetails } from "@/components/ProductDetails";
 export default async function ProductPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  // If params is a Promise, await it:
   const resolvedParams = await params;
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);

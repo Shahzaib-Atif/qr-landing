@@ -6,9 +6,6 @@ export default async function Page() {
   const supabase = createClient(cookieStore);
 
   const { data: products, error } = await supabase.from("products").select('*');
-  
-  console.log("Products data:", products);
-  console.log("Error:", error);
 
   if (error) {
     return <div>Error: {error.message}</div>;
