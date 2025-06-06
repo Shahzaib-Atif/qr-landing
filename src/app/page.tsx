@@ -1,5 +1,5 @@
 import { SupabaseProductRepository } from "@/lib/repositories/products/supabase-product-repository";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default async function Page() {
   const repo = new SupabaseProductRepository();
