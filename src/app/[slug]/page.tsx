@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
-import { createClient } from "@/lib/server";
+import { createClient } from "@/lib/supabase.server";
 import { notFound } from "next/navigation";
+import { ProductDetails } from "@/components/ProductDetails";
 
 export default async function ProductPage({
   params,
@@ -20,10 +21,5 @@ export default async function ProductPage({
 
   if (!product) return notFound();
 
-  return (
-    <main>
-      <h1>{product.name}</h1>
-      <h1>{product.image_url}</h1>
-    </main>
-  );
+  return <ProductDetails name={product.name} description={product.description} />;
 }
