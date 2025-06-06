@@ -18,7 +18,7 @@ export default async function Page() {
   );
 
   return (
-    <div className="overflow-x-auto mt-10 flex justify-center">
+    <div className="overflow-x-auto mt-10">
       <table className="min-w-[600px] bg-white border border-gray-200 rounded-lg shadow">
         <thead>
           <tr>
