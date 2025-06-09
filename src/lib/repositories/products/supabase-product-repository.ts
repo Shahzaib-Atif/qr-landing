@@ -1,5 +1,5 @@
 // lib/supabase-product-repository.ts
-import { createClient } from '@/utils/supabase-server';
+import { createClient } from '@/utils/supabase/server';
 import { cookies } from 'next/headers';
 import { IProductRepository } from '@/lib/repositories/interfaces';
 import { Product } from '@/lib/models';
